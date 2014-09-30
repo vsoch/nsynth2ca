@@ -6,7 +6,7 @@ This small package will start with the all_concepts.rda file from the Cognitive 
 - map Cognitive Atlas terms to NeuroSynth terms
 - output a .js file for a web interface to link the two
 
-http://www.vbmis.com/bmi/nsynth2as
+http://www.vbmis.com/bmi/nsynth2ca
 
 ### rdf2rda
 Converts rdf to rda
