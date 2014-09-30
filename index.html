@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ 
+  <!-- Javascript -->
+  <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="js/jquery.autocomplete.min.js"></script>
+  <script type="text/javascript" src="js/mapping.js"></script>
+
+<meta name="description" content="Mapping of NeuroSynth Terms to Cognitive Atlas" />
+<meta name="keywords" content="neurosynth, cognitive atlas, mapping, sochat" />
+
+<title>NeuroSynth to Cognitive Atlas Mapping</title>
+
+<style type="text/css">
+<style>
+body, html  { height: 100%; }html, body, div, span, applet, object, iframe,/*h1,2, h3, h4, h5, h6,*/ p, blockquote, pre,a, abbr, acronym, address,del, dfn, em, font, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td {margin: 0;padding: 0;border: 0;outline: 0;font-size: 100%;vertical-align: baseline;background: transparent;}body { line-height: 1; }ol, ul { list-style: none; }blockquote, q { quotes: none; }blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }:focus { outline: 0; }del { text-decoration: line-through; }table {border-spacing: 0; }
+
+/* Clear Floated Elements http://sonspring.com/journal/clearing-floats */
+.clear {clear: both;display: block;overflow: hidden;visibility: hidden;width: 0;height: 0;}
+
+/*------------------------------------------------------------------ */
+
+/* Page Style */
+body{
+	color: #e9e2ee;
+	font-size: 14px;
+	font-family: sans-serif;
+	line-height: 20px;
+	background: #55575c;
+	-webkit-box-shadow: inset 0 0 300px rgba(0,0,0,0.5);
+	   -moz-box-shadow: inset 0 0 300px rgba(0,0,0,0.5);
+			box-shadow: inset 0 0 300px rgba(0,0,0,0.5);
+}
+a,
+a:link,
+a:visited {
+	color: #c6eaf7;
+	font-weight: bold;
+	text-decoration:none;
+}
+a:active,
+a:hover {
+	color: #d8f3fd;
+	text-shadow: 0 1px 1px rgba(0,0,0,0.75), 0 0 5px rgba(198,234,247,0.4);
+}
+p{
+	margin-bottom: 0.3em;
+}
+.center,
+img.center {
+	text-align: center;
+	clear: both;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+#vbox{
+	background: rgba(0,0,0,0.0);
+	display: block;
+	position: absolute;
+	width: 800px;
+	height: 280px;
+	top: 50%;
+	left: 50%;
+	margin: -160px 0 0 -400px;
+}
+#vbox h1{
+	text-align: center;
+	font-size: 35px;
+	text-shadow: 0 1px 1px rgba(0,0,0,0.75);
+}
+#vbox img{
+    clear: both;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+#vbox p{
+	text-align: center;
+}
+
+#column {
+    width: 400px;
+    height: 400px;
+    float: left;
+}
+
+/*Submit Form*/
+#subscribe{
+	width: 552px;
+	display: block;
+	margin: 20px auto 40px auto;
+	padding: 4px;
+	background: rgba(0,0,0,0.1);
+	-webkit-border-radius: 4px;
+	   -moz-border-radius: 4px;
+			border-radius: 4px;
+}
+#subscribe input{
+	display: block;
+	font-size: 13px;
+	font-weight: bold;
+	float: left;
+	border: 0;
+	-webkit-border-radius: 3px;
+	   -moz-border-radius: 3px;
+			border-radius: 3px;
+	padding: 0 10px;
+	height: 35px;
+}
+#subscribe input[type="text"],
+#subscribe input[type="email"]{
+	color: #c4c4c4;
+	margin: 0 4px 0 0;
+	width: 443px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.3);
+	   -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.3);
+			box-shadow: inset 0 1px 1px rgba(0,0,0,0.3);
+}
+#subscribe input[type="submit"]{
+	margin:0;
+	width: 85px;
+	color: #5d7731;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+	background: #b6d76f;
+	background: -webkit-gradient(linear, left top, left bottom, from(#cae285), to(#9dc954));
+	background: -moz-linear-gradient(top,  #cae285,  #9dc954);
+	-webkit-box-shadow: inset 0px 1px 2px rgba(255,255,255,1), 0 1px 1px rgba(0,0,0,0.3);
+	   -moz-box-shadow: inset 0px 1px 2px rgba(255,255,255,1), 0 1px 1px rgba(0,0,0,0.3);
+			box-shadow: inset 0px 1px 2px rgba(255,255,255,1), 0 1px 1px rgba(0,0,0,0.3);
+}
+#subscribe input[type="submit"]:hover{
+	cursor: pointer;
+	-webkit-box-shadow: inset 0px 1px 2px rgba(255,255,255,1), 0 1px 1px rgba(0,0,0,0.3), 0 0 5px rgba(255,255,190,0.5);
+	   -moz-box-shadow: inset 0px 1px 2px rgba(255,255,255,1), 0 1px 1px rgba(0,0,0,0.3), 0 0 5px rgba(255,255,190,0.5);
+			box-shadow: inset 0px 1px 2px rgba(255,255,255,1), 0 1px 1px rgba(0,0,0,0.3), 0 0 5px rgba(255,255,190,0.5);
+}
+#subscribe input[type="submit"]:active{
+	cursor: pointer;
+	position: relative;
+	top: 1px;
+	text-shadow: 0 -1px 0 rgba(255,255,255,0.4);
+	background: #9dc954;
+	background: -webkit-gradient(linear, left top, left bottom, from(#9dc954), to(#cae285));
+	background: -moz-linear-gradient(top,  #9dc954,  #cae285);
+	-webkit-box-shadow: inset 0 0 0 transparent, inset 0 0 0 transparent;
+	   -moz-box-shadow: inset 0 0 0 transparent, inset 0 0 0 transparent;
+			box-shadow: inset 0 0 0 transparent, inset 0 0 0 transparent;
+}
+
+#vbox .twitter:before{
+	content: '@';
+	padding-top: 2px;
+	padding-left: 24px;
+	background: url(twitter.png) no-repeat 0 0px;
+}
+#vbox .twitter{
+	padding-top: 5px;
+}
+
+#searchfield { display: block; width: 100%; text-align: center; margin-bottom: 35px; }
+
+#searchfield form {
+  display: inline-block;
+  background: #eeefed;
+  padding: 0;
+  margin: 0;
+  padding: 5px;
+  border-radius: 3px;
+  margin: 5px 0 0 0;
+}
+#searchfield form .biginput {
+  width: 600px;
+  height: 40px;
+  padding: 0 10px 0 10px;
+  background-color: #fff;
+  border: 1px solid #c8c8c8;
+  border-radius: 3px;
+  color: #aeaeae;
+  font-weight:normal;
+  font-size: 1.5em;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+#searchfield form .biginput:focus {
+  color: #858585;
+}
+
+
+
+.autocomplete-suggestions { border: 1px solid #999; background: #fff; cursor: default; overflow: auto; color:black;}
+.autocomplete-suggestion { padding: 10px 5px; font-size: 1.2em; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #f0f0f0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399ff; }
+
+</style>
+
+</head>
+
+<body>
+
+<div id="vbox">
+
+<h1>Neurosynth To Cognitive Atlas Mapping</h1>
+
+      <div id="searchfield">
+        <form><input type="text" name="currency" class="biginput" id="autocomplete"></form>
+      </div><!-- @end #searchfield -->
+      
+      <div id="outputbox">
+        <p id="outputcontent">Choose a behavioral term and the mapping will appear here.</p>
+      </div>
+
+<a href="http://twitter.com/#!/vsoch" title="Contact vsoch on Twitter" class="twitter center">vsoch</a>
+
+</div>
+
+</body>
+</html>
